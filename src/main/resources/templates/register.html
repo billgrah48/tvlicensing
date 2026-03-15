@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+
+<head>
+    <title>TV Licensing - Register</title>
+
+    <!-- Links our shared CSS stylesheet -->
+    <link rel="stylesheet" th:href="@{/style.css}" />
+</head>
+
+<body>
+
+<!-- Pulls in the shared header from fragments.html -->
+<header th:replace="~{fragments :: header}"></header>
+
+<main>
+    <h1>Register for an Online Account</h1>
+
+    <p>Create an account to manage your TV Licence online.</p>
+
+    <!-- REGISTRATION FORM
+         action="/register" means when submitted, send the
+         data to the /register URL on the server
+         method="post" means we are SENDING data (not just
+         loading a page) -->
+    <!-- th:action builds the correct URL with CSRF token automatically -->
+    <!-- th:object binds this form to the Customer object from the controller -->
+    <form th:action="@{/register}" th:object="${customer}" method="post">
+
+        <!-- Shows an error message if one was sent back from the controller -->
+        <div class="alert" th:if="${error}" style="border-left-color: #d32f2f; background-color: #fdecea;">
+            <p th:text="${error}">Error message here</p>
+        </div>
+
+    <!-- Full name field -->
+        <label for="fullName">Full Name</label>
+        <input type="text" id="fullName" name="fullName"
+               placeholder="Enter your full name"
+               minlength="3"
+               pattern="[A-Za-z]+ [A-Za-z]+.*"
+               title="Please enter your first and last name" required/>
+
+        <!-- Email address field -->
+        <label for="email">Email Address</label>
+        <input type="email" id="email" name="email"
+               placeholder="Enter your email address" required />
+
+        <!-- ADDRESS LINE 1-->
+        <label for="addressLine1">Address Line 1</label>
+        <input type="text"
+               id="addressLine1"
+               name="addressLine1"
+               placeholder="House number and street name"
+               required />
+
+        <!-- ADDRESS LINE 2 not required-->
+        <label for="addressLine2">Address Line 2 (optional)</label>
+        <input type="text"
+               id="addressLine2"
+               name="addressLine2"
+               placeholder="Apartment, flat, suite etc." />
+
+        <!-- TOWN OR CITY -->
+        <label for="city">Town or City</label>
+        <input type="text"
+               id="city"
+               name="city"
+               placeholder="Enter your town or city"
+               required />
+
+        <!-- POSTCODE -->
+        <label for="postcode">Postcode</label>
+        <input type="text"
+               id="postcode"
+               name="postcode"
+               placeholder="e.g. BT1 1AA"
+               required />
+
+        <!-- Password field -->
+        <label for="password">Password</label>
+        <input type="password" id="password" name="password"
+               placeholder="Create a password" required />
+
+        <!-- Confirm password field -->
+        <label for="confirmPassword">Confirm Password</label>
+        <input type="password" id="confirmPassword" name="confirmPassword"
+               placeholder="Repeat your password" required />
+
+        <!-- Submit button - clicking this sends the form -->
+        <button type="submit" class="btn">Create Account</button>
+
+    </form>
+
+    <!-- Link back to login for users who already have an account -->
+    <p style="margin-top: 20px;">Already have an account?
+        <a href="/login">Sign in here</a>
+    </p>
+
+</main>
+
+<!-- Pulls in the shared footer from fragments.html -->
+<footer th:replace="~{fragments :: footer}"></footer>
+
+</body>
+
+</html>

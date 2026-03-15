@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <title>TV Licensing - Home</title>
+
+    <!-- Links our CSS stylesheet -->
+    <link rel="stylesheet" th:href="@{/style.css}" />
+</head>
+
+<body>
+
+<!-- HEADER FRAGMENT
+     th:replace pulls in the "header" fragment
+     from fragments.html and replaces this tag with it -->
+<header th:replace="~{fragments :: header}"></header>
+
+<!-- MAIN CONTENT -->
+<main>
+    <h1>Welcome to TV Licensing</h1>
+
+    <p>Manage your TV Licence quickly and easily online.</p>
+
+    <div class="alert">
+        <p>From 1 April 2026 a colour TV Licence costs £14.54 a month by Direct Debit. Or <strong>£174.50</strong> in one go.</p>
+    </div>
+
+    <p>Please sign in to your account or register if you are a new customer.</p>
+
+    <!-- Buttons linking to login and register pages -->
+    <a href="/login" class="btn">Sign In</a>
+    <a href="/register" class="btn">Register</a>
+</main>
+
+<!-- FOOTER FRAGMENT
+     Same idea - pulls in the "footer" fragment -->
+<footer th:replace="~{fragments :: footer}"></footer>
+
+</body>
+
+</html>

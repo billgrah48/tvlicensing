@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <title>TV Licensing - Sign In</title>
+
+    <!-- Links our shared CSS stylesheet -->
+    <link rel="stylesheet" th:href="@{/style.css}" />
+</head>
+
+<body>
+
+<!-- Pulls in the shared header from fragments.html -->
+<header th:replace="~{fragments :: header}"></header>
+
+<main>
+    <h1>Sign In to Your Account</h1>
+
+    <p>Enter your email address and password to access your account.</p>
+    <!-- Shows a success message after successful registration -->
+    <div class="alert" th:if="${success}">
+        <p th:text="${success}">Success message here</p>
+    </div>
+
+    <!-- Shows an error message if login failed -->
+    <div class="alert" th:if="${error}" style="border-left-color: #d32f2f; background-color: #fdecea;">
+        <p th:text="${error}">Error message here</p>
+    </div>
+    <!-- LOGIN FORM
+         action="/login" sends the data to /login on the server
+         method="post" means we are sending data securely -->
+    <form th:action="@{/login}" method="post">
+
+
+    <!-- Email address field -->
+        <label for="email">Email Address</label>
+        <input type="email" id="email" name="username"
+               placeholder="Enter your email address" required />
+
+        <!-- Password field -->
+        <label for="password">Password</label>
+        <input type="password" id="password" name="password"
+               placeholder="Enter your password" required />
+
+        <!-- Submit button -->
+        <button type="submit" class="btn">Sign In</button>
+
+    </form>
+
+    <!-- Link to register for users who don't have an account -->
+    <p style="margin-top: 20px;">Don't have an account?
+        <a href="/register">Register here</a>
+    </p>
+
+</main>
+
+<!-- Pulls in the shared footer from fragments.html -->
+<footer th:replace="~{fragments :: footer}"></footer>
+
+</body>
+
+</html>

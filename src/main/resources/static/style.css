@@ -1,0 +1,159 @@
+/* ============================================
+   TV LICENSING APPLICATION - MAIN STYLESHEET
+   Inspired by tvlicensing.co.uk
+   ============================================ */
+
+/* --- GLOBAL RESET ---
+   Removes default browser spacing so everything
+   looks the same across all browsers */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* --- BODY ---
+   Sets the default font and background colour
+   for the entire application */
+body {
+    font-family: Arial, Helvetica, sans-serif;
+    background-color: #f4f4f4;
+    color: #333333;
+    font-size: 16px;
+    line-height: 1.5;
+}
+
+/* --- HEADER ---
+   The dark blue bar that runs across the top
+   of every page, containing the logo and nav */
+header {
+    background-color: #003479;
+    padding: 15px 30px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+/* --- LOGO TEXT ---
+   Styles the TV Licensing name in the header */
+header .logo {
+    color: #ffffff;
+    font-size: 22px;
+    font-weight: bold;
+    text-decoration: none;
+}
+
+/* --- NAVIGATION LINKS ---
+   The links in the top right of the header */
+header nav a {
+    color: #ffffff;
+    text-decoration: none;
+    margin-left: 20px;
+    font-size: 15px;
+}
+
+/* Changes nav link colour when you hover over it */
+header nav a:hover {
+    text-decoration: underline;
+}
+
+/* --- MAIN CONTENT AREA ---
+   The white box in the centre where page
+   content sits */
+main {
+    max-width: 900px;
+    margin: 40px auto;
+    background-color: #ffffff;
+    padding: 40px;
+    border-radius: 4px;
+}
+
+/* --- PAGE HEADINGS ---
+   The large blue heading at the top of each page */
+h1 {
+    color: #003479;
+    font-size: 28px;
+    margin-bottom: 20px;
+}
+
+/* --- SUBHEADINGS --- */
+h2 {
+    color: #003479;
+    font-size: 22px;
+    margin-bottom: 15px;
+}
+
+/* --- PARAGRAPHS ---
+   Adds spacing below each paragraph */
+p {
+    margin-bottom: 15px;
+    color: #333333;
+}
+
+/* --- BUTTONS ---
+   The blue action buttons used across the site */
+.btn {
+    display: inline-block;
+    background-color: #003479;
+    color: #ffffff;
+    padding: 12px 25px;
+    text-decoration: none;
+    border: none;
+    border-radius: 3px;
+    font-size: 16px;
+    cursor: pointer;
+    margin-top: 10px;
+}
+
+/* Changes button colour slightly when hovered */
+.btn:hover {
+    background-color: #002255;
+}
+
+/* --- FORMS ---
+   Styles input fields and labels in forms */
+form label {
+    display: block;
+    font-weight: bold;
+    margin-bottom: 5px;
+    color: #333333;
+}
+
+/* Styles the text input boxes */
+form input[type="text"],
+form input[type="email"],
+form input[type="password"] {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 20px;
+    border: 1px solid #cccccc;
+    border-radius: 3px;
+    font-size: 16px;
+}
+
+/* Highlights an input box when the user clicks it */
+form input:focus {
+    outline: none;
+    border-color: #003479;
+}
+
+/* --- FOOTER ---
+   The dark blue bar at the bottom of every page */
+footer {
+    background-color: #003479;
+    color: #ffffff;
+    text-align: center;
+    padding: 20px;
+    margin-top: 40px;
+    font-size: 14px;
+}
+
+/* --- ALERT / INFO BOX ---
+   A blue information box for important messages */
+.alert {
+    background-color: #e8f0fe;
+    border-left: 4px solid #003479;
+    padding: 15px;
+    margin-bottom: 20px;
+    color: #333333;
+}

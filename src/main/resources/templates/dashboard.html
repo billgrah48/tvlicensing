@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+  <title>TV Licensing - My Account</title>
+
+  <!-- Links our shared CSS stylesheet -->
+  <link rel="stylesheet" th:href="@{/style.css}" />
+</head>
+
+<body>
+
+<!-- Pulls in the shared header from fragments.html -->
+<header th:replace="~{fragments :: header}"></header>
+
+<main>
+
+  <!-- WELCOME SECTION
+       When we build the login system, "Customer" will be
+       replaced with the actual logged-in customer's name -->
+  <h1>Welcome back, Customer</h1>
+
+  <p>Manage your TV Licence and account details below.</p>
+
+  <!-- LICENCE STATUS BOX
+       This will be populated from the database later -->
+  <div class="alert">
+    <p><strong>Licence Status:</strong> Active</p>
+    <p><strong>Licence Number:</strong> AB1234567890</p>
+    <p><strong>Expiry Date:</strong> 31 March 2026</p>
+    <p><strong>Licence Type:</strong> Colour TV Licence</p>
+  </div>
+
+  <!-- QUICK ACTIONS SECTION -->
+  <h2>What would you like to do?</h2>
+
+  <!-- Action buttons for common tasks -->
+  <a href="/payment" class="btn">Make a Payment</a>
+  <a href="/update-address" class="btn">Update My Address</a>
+  <a href="/licence" class="btn">View Licence Details</a>
+
+  <!-- Sign out link - will be wired up properly later -->
+  <p style="margin-top: 30px;">
+    <a href="/logout">Sign out</a>
+  </p>
+
+</main>
+
+<!-- Pulls in the shared footer from fragments.html -->
+<footer th:replace="~{fragments :: footer}"></footer>
+
+</body>
+
+</html>
