@@ -56,4 +56,5 @@ public class CustomerService {
         // The repository handles the actual SQL INSERT statement
         customerRepository.save(customer);
     }
+
 }

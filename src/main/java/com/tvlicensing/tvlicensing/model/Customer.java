@@ -2,20 +2,21 @@ package com.tvlicensing.tvlicensing.model;
 
 // @Entity tells JPA this class maps to a database table
 import jakarta.persistence.Entity;
-
 // @Table lets us specify the exact name of the database table
 import jakarta.persistence.Table;
-
 // @Id marks the field that is the primary key (unique identifier)
 import jakarta.persistence.Id;
-
 // @GeneratedValue tells the database to auto-generate the ID
 // number automatically every time a new customer is saved
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
-
 // @Column lets us configure individual database columns
 import jakarta.persistence.Column;
+// Imports for Bean Validation annotations
+import jakarta.validation.constraints.Email;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.Pattern;
+import jakarta.validation.constraints.Size;
 
 // @Entity tells Spring Boot and JPA to create a database table based on this class
 @Entity
@@ -31,20 +32,29 @@ public class Customer {
 
     // The customer's full name
     // nullable = false means this column cannot be left empty
+    @NotBlank(message = "Full name is required")
+    @Size(min = 2, max = 100, message ="Name must be between 2 and 100 characters")
+    @Pattern(regexp = "[A-Za-z]+ [A-Za-z]+.*", message = "Please enter your first and last name")
     @Column(nullable = false)
     private String fullName;
 
     // The customer's email address
     // unique = true means no two customers can share an email
     // nullable = false means it must always have a value
+    // this is back end validation instead of the browser html required etc validation
+    @NotBlank(message = "Email address is required")
+    @Email(message = "Please enter a valid email address")
     @Column(nullable = false, unique = true)
     private String email;
 
     // The customer's password
+    @NotBlank(message = "Password is required")
+    @Size(min = 8, message = "Password must be at least 8 characters")
     @Column(nullable = false)
     private String password;
 
     // Address fields - matching what we built in the register form
+    @NotBlank(message = "Address line 1 is required")
     @Column(nullable = false)
     private String addressLine1;
 
@@ -52,9 +62,11 @@ public class Customer {
     @Column
     private String addressLine2;
 
+    @NotBlank(message = "Town or City is required")
     @Column(nullable = false)
     private String city;
 
+    @NotBlank(message = "Postcode is required")
     @Column(nullable = false)
     private String postcode;
     // =============================================

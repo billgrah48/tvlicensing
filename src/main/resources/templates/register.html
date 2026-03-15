@@ -35,23 +35,36 @@
     <!-- Full name field -->
         <label for="fullName">Full Name</label>
         <input type="text" id="fullName" name="fullName"
+               th:value="*{fullName}"
                placeholder="Enter your full name"
                minlength="3"
                pattern="[A-Za-z]+ [A-Za-z]+.*"
                title="Please enter your first and last name" required/>
+        <!-- Shows the server side validation error for this field if present -->
+        <p style="color:#d32f2f; font-size:14px; margin-top:-15px; margin-bottom:10px;"
+           th:if="${#fields.hasErrors('fullName')}"
+           th:errors="*{fullName}">Name error</p>
 
         <!-- Email address field -->
         <label for="email">Email Address</label>
         <input type="email" id="email" name="email"
+               th:value="*{email}"
                placeholder="Enter your email address" required />
+        <p style="color:#d32f2f; font-size:14px; margin-top:-15px; margin-bottom:10px;"
+           th:if="${#fields.hasErrors('email')}"
+           th:errors="*{email}">Email error</p>
 
         <!-- ADDRESS LINE 1-->
         <label for="addressLine1">Address Line 1</label>
         <input type="text"
                id="addressLine1"
                name="addressLine1"
+               th:value="*{addressLine1}"
                placeholder="House number and street name"
                required />
+        <p style="color:#d32f2f; font-size:14px; margin-top:-15px; margin-bottom:10px;"
+           th:if="${#fields.hasErrors('addressLine1')}"
+           th:errors="*{addressLine1}">Address error</p>
 
         <!-- ADDRESS LINE 2 not required-->
         <label for="addressLine2">Address Line 2 (optional)</label>
@@ -65,21 +78,32 @@
         <input type="text"
                id="city"
                name="city"
+               th:value="*{city}"
                placeholder="Enter your town or city"
                required />
+        <p style="color:#d32f2f; font-size:14px; margin-top:-15px; margin-bottom:10px;"
+           th:if="${#fields.hasErrors('city')}"
+           th:errors="*{city}">City error</p>
 
         <!-- POSTCODE -->
         <label for="postcode">Postcode</label>
         <input type="text"
                id="postcode"
                name="postcode"
+               th:value="*{postcode}"
                placeholder="e.g. BT1 1AA"
                required />
+        <p style="color:#d32f2f; font-size:14px; margin-top:-15px; margin-bottom:10px;"
+           th:if="${#fields.hasErrors('postcode')}"
+           th:errors="*{postcode}">Postcode error</p>
 
         <!-- Password field -->
         <label for="password">Password</label>
         <input type="password" id="password" name="password"
-               placeholder="Create a password" required />
+               placeholder="Create a password (minimum 8 characters)" required />
+        <p style="color:#d32f2f; font-size:14px; margin-top:-15px; margin-bottom:10px;"
+           th:if="${#fields.hasErrors('password')}"
+           th:errors="*{password}">Password error</p>
 
         <!-- Confirm password field -->
         <label for="confirmPassword">Confirm Password</label>

@@ -1,54 +1,138 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
-
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
 <head>
-  <title>TV Licensing - My Account</title>
-
-  <!-- Links our shared CSS stylesheet -->
+  <title>TV Licensing - Dashboard</title>
   <link rel="stylesheet" th:href="@{/style.css}" />
 </head>
-
 <body>
 
-<!-- Pulls in the shared header from fragments.html -->
 <header th:replace="~{fragments :: header}"></header>
 
 <main>
+  <h1>Welcome, <span th:text="${customer.fullName}">Customer Name</span></h1>
 
-  <!-- WELCOME SECTION
-       When we build the login system, "Customer" will be
-       replaced with the actual logged-in customer's name -->
-  <h1>Welcome back, Customer</h1>
-
-  <p>Manage your TV Licence and account details below.</p>
-
-  <!-- LICENCE STATUS BOX
-       This will be populated from the database later -->
-  <div class="alert">
-    <p><strong>Licence Status:</strong> Active</p>
-    <p><strong>Licence Number:</strong> AB1234567890</p>
-    <p><strong>Expiry Date:</strong> 31 March 2026</p>
-    <p><strong>Licence Type:</strong> Colour TV Licence</p>
+  <!-- SUCCESS MESSAGE - shown after a licence is purchased successfully
+       licencePurchased is set as a query param on redirect from LicenceController -->
+  <div class="alert" th:if="${licencePurchased}"
+       style="border-left-color: #2e7d32; background-color: #f1f8f1;">
+    <p>Your TV Licence has been purchased successfully!</p>
   </div>
 
-  <!-- QUICK ACTIONS SECTION -->
-  <h2>What would you like to do?</h2>
+  <!-- CANCELLATION MESSAGE - shown after a licence is cancelled -->
+  <div class="alert" th:if="${licenceCancelled}"
+       style="border-left-color: #d32f2f; background-color: #fdecea;">
+    <p>Your TV Licence has been cancelled.</p>
+  </div>
 
-  <!-- Action buttons for common tasks -->
-  <a href="/payment" class="btn">Make a Payment</a>
-  <a href="/update-address" class="btn">Update My Address</a>
-  <a href="/licence" class="btn">View Licence Details</a>
-
-  <!-- Sign out link - will be wired up properly later -->
-  <p style="margin-top: 30px;">
-    <a href="/logout">Sign out</a>
+  <!-- ACCOUNT DETAILS SECTION
+       Displays the customer's personal and contact information -->
+  <h2>Your Details</h2>
+  <p><strong>Email:</strong> <span th:text="${customer.email}">email</span></p>
+  <p><strong>Address:</strong>
+    <span th:text="${customer.addressLine1}">address</span>,
+    <!-- addressLine2 is optional - only shown if it has a value -->
+    <span th:if="${customer.addressLine2}" th:text="${customer.addressLine2}"></span>
+    <span th:text="${customer.city}">city</span>,
+    <span th:text="${customer.postcode}">postcode</span>
   </p>
+
+  <h2>Your TV Licences</h2>
+
+  <!-- EMPTY STATE - shown when the customer has no licences at all
+       Prompts them to purchase their first licence -->
+  <div th:if="${#lists.isEmpty(licences)}">
+    <p>You do not currently hold a TV Licence.</p>
+    <a href="/licence/buy" class="btn">Purchase a TV Licence</a>
+  </div>
+
+  <!-- LICENCE LIST - loops through every licence linked to this customer
+       th:each works like a for-each loop, one card per licence -->
+  <div th:each="licence : ${licences}"
+       style="margin-bottom: 20px; padding: 15px; border: 1px solid #ddd; border-radius: 4px;">
+
+    <!-- THE LICENSED ADDRESS
+         This may differ from the customer's account address
+         e.g. if they licensed a second property -->
+    <p><strong>Licensed Address:</strong>
+      <span th:text="${licence.addressLine1}"></span>,
+      <span th:if="${licence.addressLine2}" th:text="${licence.addressLine2}"></span>
+      <span th:text="${licence.city}"></span>,
+      <span th:text="${licence.postcode}"></span>
+    </p>
+
+    <!-- LICENCE STATUS BADGE
+         Colour coded: green = ACTIVE, red = CANCELLED, orange = EXPIRED -->
+    <p><strong>Status:</strong>
+      <span th:text="${licence.status}"
+            th:style="${licence.status.name() == 'ACTIVE'} ? 'color: #2e7d32; font-weight: bold;' :
+                             (${licence.status.name() == 'CANCELLED'} ? 'color: #d32f2f; font-weight: bold;' :
+                             'color: #f57c00; font-weight: bold;')">
+            </span>
+    </p>
+
+    <!-- LICENCE DATES
+         All licences run for exactly one year from the start date
+         #temporals.format formats LocalDate into a readable string -->
+    <p><strong>Start Date:</strong>
+      <span th:text="${#temporals.format(licence.startDate, 'dd MMMM yyyy')}"></span>
+    </p>
+    <p><strong>Expiry Date:</strong>
+      <span th:text="${#temporals.format(licence.endDate, 'dd MMMM yyyy')}"></span>
+    </p>
+
+    <!-- PAYMENT INFORMATION
+         Shows different content depending on payment type:
+         FULL = single annual payment
+         DIRECT_DEBIT = monthly payments with next due date shown -->
+    <p><strong>Payment Type:</strong>
+      <!-- Full payment - single annual charge -->
+      <span th:if="${licence.paymentType.name() == 'FULL'}">
+                Full Payment — £174.50/year
+            </span>
+      <!-- Direct debit - monthly payments
+           Also shows the next payment due date -->
+      <span th:if="${licence.paymentType.name() == 'DIRECT_DEBIT'}">
+                Direct Debit — £14.54/month*
+                <br/>
+                <small style="color: #666;">*Initial payments may be higher</small>
+                <br/>
+                <strong>Next Payment Due:</strong>
+                <span th:text="${#temporals.format(licence.nextPaymentDate, 'dd MMMM yyyy')}"></span>
+            </span>
+    </p>
+
+    <!-- CANCEL BUTTON
+         Only shown for ACTIVE licences - no point cancelling an
+         already cancelled or expired licence
+         onsubmit confirmation prevents accidental cancellations
+         The hidden licenceId field tells the controller which
+         licence to cancel -->
+    <form th:if="${licence.status.name() == 'ACTIVE'}"
+          th:action="@{/licence/cancel}" method="post"
+          onsubmit="return confirm('Are you sure you want to cancel this licence?');">
+      <input type="hidden" name="licenceId" th:value="${licence.id}" />
+      <button type="submit"
+              style="background-color: #d32f2f; color: white; border: none;
+                           padding: 8px 16px; border-radius: 4px; cursor: pointer;">
+        Cancel Licence
+      </button>
+    </form>
+
+  </div>
+
+  <!-- PURCHASE ANOTHER LICENCE LINK
+       Only shown when the customer already has at least one licence
+       Supports the real-world scenario of licensing a second property -->
+  <div th:if="${!#lists.isEmpty(licences)}" style="margin-top: 10px;">
+    <a href="/licence/buy">+ Purchase a licence for another address</a>
+  </div>
+
+  <br/>
+  <a href="/logout" class="btn">Sign Out</a>
 
 </main>
 
-<!-- Pulls in the shared footer from fragments.html -->
 <footer th:replace="~{fragments :: footer}"></footer>
 
 </body>
-
 </html>
