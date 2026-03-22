@@ -1,7 +1,5 @@
-// This file belongs to the config package
 package com.tvlicensing.tvlicensing.config;
 
-// Imports our custom service that loads customers from the database
 import com.tvlicensing.tvlicensing.service.CustomerUserDetailsService;
 
 // @Bean marks a method as producing a Spring-managed object
@@ -41,30 +39,22 @@ import org.springframework.security.web.SecurityFilterChain;
 @EnableWebSecurity
 public class SecurityConfig {
 
-    // Our custom service that looks up customers from the database
-    // when someone tries to log in
+    //custom service that looks up customers from the database
     private final CustomerUserDetailsService customerUserDetailsService;
 
-    // Spring automatically injects CustomerUserDetailsService here
     public SecurityConfig(CustomerUserDetailsService customerUserDetailsService) {
         this.customerUserDetailsService = customerUserDetailsService;
     }
 
     // PASSWORD ENCODER
-    // BCrypt encrypts passwords before they are stored in the database
-    // It adds a random "salt" so identical passwords store differently
-    // Declared as a @Bean so it can be used anywhere in the app
     @Bean
     public PasswordEncoder passwordEncoder() {
         return new BCryptPasswordEncoder();
     }
 
     // AUTHENTICATION MANAGER
-    // In Spring Boot 4 / Spring Security 6 this is the correct way
-    // to expose authentication management
     // Spring automatically detects our CustomerUserDetailsService bean
     // and PasswordEncoder bean and wires them together behind the scenes
-    // No manual DaoAuthenticationProvider needed in this version
     @Bean
     public AuthenticationManager authenticationManager(
             AuthenticationConfiguration config) throws Exception {
@@ -72,8 +62,7 @@ public class SecurityConfig {
     }
 
     // SECURITY FILTER CHAIN
-    // This method defines all the rules for who can access what,
-    // how login works, and how logout works
+    // This method defines all the rules for who can access what, how login works, and how logout works
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
 
@@ -84,11 +73,9 @@ public class SecurityConfig {
                         // These pages are PUBLIC - no login required
                         .requestMatchers("/", "/login", "/register").permitAll()
 
-                        // Static resources are always permitted - CSS, JS, images
+                        // Static resources are always permitted
                         .requestMatchers("/style.css", "/**.css", "/**.js", "/images/**").permitAll()
 
-                        // H2 console is public during development only
-                        // We will lock this down before deploying to Azure
                         .requestMatchers("/h2-console/**").permitAll()
 
                         // Everything else requires the user to be logged in

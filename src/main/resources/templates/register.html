@@ -4,13 +4,11 @@
 <head>
     <title>TV Licensing - Register</title>
 
-    <!-- Links our shared CSS stylesheet -->
     <link rel="stylesheet" th:href="@{/style.css}" />
 </head>
 
 <body>
 
-<!-- Pulls in the shared header from fragments.html -->
 <header th:replace="~{fragments :: header}"></header>
 
 <main>
@@ -18,13 +16,7 @@
 
     <p>Create an account to manage your TV Licence online.</p>
 
-    <!-- REGISTRATION FORM
-         action="/register" means when submitted, send the
-         data to the /register URL on the server
-         method="post" means we are SENDING data (not just
-         loading a page) -->
-    <!-- th:action builds the correct URL with CSRF token automatically -->
-    <!-- th:object binds this form to the Customer object from the controller -->
+    <!-- REGISTRATION FORM-->
     <form th:action="@{/register}" th:object="${customer}" method="post">
 
         <!-- Shows an error message if one was sent back from the controller -->
@@ -110,7 +102,7 @@
         <input type="password" id="confirmPassword" name="confirmPassword"
                placeholder="Repeat your password" required />
 
-        <!-- Submit button - clicking this sends the form -->
+        <!-- Submit button -->
         <button type="submit" class="btn">Create Account</button>
 
     </form>

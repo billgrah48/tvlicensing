@@ -16,20 +16,21 @@ public class LicenceService {
         this.tvLicenceRepository = tvLicenceRepository;
     }
 
-    // PURCHASE A LICENCE
     // Called when the customer submits the buy licence form
-    // Uses the TvLicence constructor to set dates, status and
-    // monthly amount automatically based on payment type
+    // Uses the TvLicence constructor
     public TvLicence purchaseLicence(Customer customer, String addressLine1,
                                      String addressLine2, String city,
                                      String postcode, TvLicence.PaymentType paymentType) {
 
-        // Check if this customer already has an ACTIVE licence
-        // at this postcode - prevents duplicate licences at same address
+        // Check if this customer already has an active licence at this postcode
         List<TvLicence> existing = tvLicenceRepository.findByLicenceHolder(customer);
         for (TvLicence licence : existing) {
-            if (licence.getPostcode().equalsIgnoreCase(postcode)
-                    && licence.getStatus() == TvLicence.LicenceStatus.ACTIVE) {
+            boolean sameAddress =
+                    licence.getPostcode().equalsIgnoreCase(postcode) &&
+                            licence.getAddressLine1().equalsIgnoreCase(addressLine1) &&
+                            licence.getCity().equalsIgnoreCase(city);
+
+            if (sameAddress && licence.getStatus() == TvLicence.LicenceStatus.ACTIVE) {
                 throw new RuntimeException(
                         "You already have an active licence at this address");
             }
@@ -42,15 +43,13 @@ public class LicenceService {
     }
 
     // CANCEL A LICENCE
-    // Sets the status to CANCELLED - we never delete licences
-    // for audit/history purposes
+    // Sets the status to cancelled
     public void cancelLicence(Long licenceId, Customer customer) {
 
         TvLicence licence = tvLicenceRepository.findById(licenceId)
                 .orElseThrow(() -> new RuntimeException("Licence not found"));
 
-        // Security check - make sure the licence belongs to this customer
-        // Prevents one customer cancelling another's licence via URL manipulation
+        // Security check to make sure the licence belongs to this customer
         if (!licence.getLicenceHolder().getId().equals(customer.getId())) {
             throw new RuntimeException("You are not authorised to cancel this licence");
         }

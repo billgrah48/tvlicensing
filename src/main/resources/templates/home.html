@@ -1,18 +1,13 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
-
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
 <head>
     <title>TV Licensing - Home</title>
-
-    <!-- Links our CSS stylesheet -->
     <link rel="stylesheet" th:href="@{/style.css}" />
 </head>
 
 <body>
 
-<!-- HEADER FRAGMENT
-     th:replace pulls in the "header" fragment
-     from fragments.html and replaces this tag with it -->
+<!-- HEADER FRAGMENT -->
 <header th:replace="~{fragments :: header}"></header>
 
 <!-- MAIN CONTENT -->

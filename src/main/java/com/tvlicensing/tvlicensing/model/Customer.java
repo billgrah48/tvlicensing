@@ -1,6 +1,6 @@
 package com.tvlicensing.tvlicensing.model;
 
-// @Entity tells JPA this class maps to a database table
+
 import jakarta.persistence.Entity;
 // @Table lets us specify the exact name of the database table
 import jakarta.persistence.Table;
@@ -18,20 +18,16 @@ import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Pattern;
 import jakarta.validation.constraints.Size;
 
-// @Entity tells Spring Boot and JPA to create a database table based on this class
 @Entity
 
 public class Customer {
 
-    // This is the primary key - a unique ID number for every customer
-    // @GeneratedValue means the database assigns this number
-    // automatically - we never set it manually
+    // This is the primary key - a unique ID number for every customer, the database assigns it automatically
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     // The customer's full name
-    // nullable = false means this column cannot be left empty
     @NotBlank(message = "Full name is required")
     @Size(min = 2, max = 100, message ="Name must be between 2 and 100 characters")
     @Pattern(regexp = "[A-Za-z]+ [A-Za-z]+.*", message = "Please enter your first and last name")
@@ -39,9 +35,6 @@ public class Customer {
     private String fullName;
 
     // The customer's email address
-    // unique = true means no two customers can share an email
-    // nullable = false means it must always have a value
-    // this is back end validation instead of the browser html required etc validation
     @NotBlank(message = "Email address is required")
     @Email(message = "Please enter a valid email address")
     @Column(nullable = false, unique = true)
@@ -53,12 +46,12 @@ public class Customer {
     @Column(nullable = false)
     private String password;
 
-    // Address fields - matching what we built in the register form
+    // Address fields
     @NotBlank(message = "Address line 1 is required")
     @Column(nullable = false)
     private String addressLine1;
 
-    // Address line 2 is optional - so nullable = true (the default)
+    // Address line 2 is optional
     @Column
     private String addressLine2;
 
@@ -69,18 +62,14 @@ public class Customer {
     @NotBlank(message = "Postcode is required")
     @Column(nullable = false)
     private String postcode;
-    // =============================================
-    // CONSTRUCTORS
-    // A constructor is a special method that creates
-    // a new Customer object
-    // =============================================
 
-    // Empty constructor - required by JPA, do not remove this
+    // CONSTRUCTORS
+
+    // Empty constructor - required by JPA do not remove this
     public Customer() {
     }
 
-    // Full constructor - lets us create a Customer and fill
-    // in all the details in one go
+    // Full constructor - lets us create a Customer and fill  in all the details in one go
     public Customer(String fullName, String email, String password,
                     String addressLine1, String addressLine2,
                     String city, String postcode) {
@@ -92,14 +81,8 @@ public class Customer {
         this.city = city;
         this.postcode = postcode;
     }
-    // =============================================
-    // GETTERS AND SETTERS
-    // These are methods that allow other classes to
-    // read and update the fields of this class
-    // Java convention is to never access fields directly
-    // from outside a class - always use getters/setters
-    // =============================================
 
+    // GETTERS AND SETTERS
     public Long getId() {
         return id;
     }

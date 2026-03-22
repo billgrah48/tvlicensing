@@ -1,13 +1,10 @@
 <!DOCTYPE html>
-<!-- The sec namespace lets us check login state in HTML -->
 <html xmlns:th="http://www.thymeleaf.org"
       xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 
 <body>
 
-<!-- HEADER FRAGMENT
-     th:fragment="header" names this block so any page
-     can pull it in with th:replace="~{fragments :: header}" -->
+<!-- HEADER FRAGMENT -->
 <header th:fragment="header">
 
     <!-- Logo linking back to the home page -->
@@ -17,9 +14,6 @@
         <!-- Only show these links if the user IS logged in -->
         <span sec:authorize="isAuthenticated()">
                 <a href="/dashboard">My Account</a>
-
-            <!-- Logout must be a POST form in Spring Security 6
-                 A plain href link would use GET which is blocked -->
                 <form th:action="@{/logout}" method="post" style="display:inline;">
                     <button type="submit"
                             style="background:none; border:none; color:white;

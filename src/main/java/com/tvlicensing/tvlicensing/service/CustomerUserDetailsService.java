@@ -1,7 +1,5 @@
-// This file belongs to the service package
 package com.tvlicensing.tvlicensing.service;
 
-// Imports our Customer model
 import com.tvlicensing.tvlicensing.model.Customer;
 
 // Imports our repository to look up customers in the database
@@ -31,10 +29,7 @@ public class CustomerUserDetailsService implements UserDetailsService {
         this.customerRepository = customerRepository;
     }
 
-    // THIS IS THE KEY METHOD
-    // Spring Security calls this automatically when someone
-    // tries to log in - it passes in whatever they typed
-    // in the email/username field
+    // Spring Security calls this automatically when someone tries to log in
     @Override
     public UserDetails loadUserByUsername(String email)
             throws UsernameNotFoundException {
@@ -46,10 +41,7 @@ public class CustomerUserDetailsService implements UserDetailsService {
                 .orElseThrow(() -> new UsernameNotFoundException(
                         "No account found with email: " + email));
 
-        // Build and return a Spring Security UserDetails object
-        // using the customer's email, encrypted password,
-        // and their role (CUSTOMER)
-        // Spring Security then checks the password automatically
+        // Spring Security checks the password automatically
         return User.builder()
                 .username(customer.getEmail())
                 .password(customer.getPassword())

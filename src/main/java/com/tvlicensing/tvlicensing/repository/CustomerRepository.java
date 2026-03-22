@@ -1,7 +1,5 @@
 package com.tvlicensing.tvlicensing.repository;
 
-// Imports our Customer model so this repository knows
-// what type of data it is working with
 import com.tvlicensing.tvlicensing.model.Customer;
 
 // JpaRepository gives us all the standard database methods
@@ -19,10 +17,7 @@ import java.util.Optional;
 // for the standard methods - Spring generates them automatically
 public interface CustomerRepository extends JpaRepository<Customer, Long> {
 
-    // This is a custom method - Spring reads the method name
-    // and automatically generates the SQL to find a customer
-    // by their email address
-    // We will use this when a customer tries to log in
+    // Spring reads the method nameand automatically generates the SQL to find a customer
     Optional<Customer> findByEmail(String email);
 }
 

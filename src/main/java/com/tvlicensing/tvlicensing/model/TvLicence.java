@@ -8,19 +8,16 @@ import java.time.LocalDate;
 @Table(name = "tv_licence")
 public class TvLicence {
 
-    // Primary key - auto generated
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     // The named licence holder - many licences can belong to one customer
-    // (e.g. second home) but each licence has only one holder
     @ManyToOne
     @JoinColumn(name = "customer_id", nullable = false)
     private Customer licenceHolder;
 
-    // The licensed ADDRESS - separate from the customer's account address
-    // Pre-filled from customer details but can be changed at purchase
+    // The licensed address separate from the customer's account address
     @Column(nullable = false)
     private String addressLine1;
 
@@ -60,11 +57,6 @@ public class TvLicence {
     @Column
     private BigDecimal monthlyAmount;
 
-    // =============================================
-    // ENUMS
-    // Defined inside the class to keep them together
-    // =============================================
-
     public enum LicenceStatus {
         ACTIVE, CANCELLED, EXPIRED
     }
@@ -73,9 +65,7 @@ public class TvLicence {
         FULL, DIRECT_DEBIT
     }
 
-    // =============================================
     // CONSTRUCTORS
-    // =============================================
 
     public TvLicence() {}
 

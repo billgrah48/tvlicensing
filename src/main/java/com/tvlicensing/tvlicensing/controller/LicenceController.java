@@ -23,8 +23,7 @@ public class LicenceController {
         this.customerRepository = customerRepository;
     }
 
-    // GET /licence/buy - loads the purchase form
-    // Pre-fills address from the customer's registered details
+    //Loads the purchase form Pre-fills address from the customer's registered details
     @GetMapping("/buy")
     public String buyLicencePage(@AuthenticationPrincipal UserDetails userDetails,
                                  Model model) {
@@ -33,7 +32,6 @@ public class LicenceController {
                 .orElseThrow(() -> new RuntimeException("Customer not found"));
 
         // Pre-fill a TvLicence object with the customer's address
-        // so the form fields are already populated
         TvLicence licence = new TvLicence();
         licence.setAddressLine1(customer.getAddressLine1());
         licence.setAddressLine2(customer.getAddressLine2());
@@ -44,7 +42,7 @@ public class LicenceController {
         return "buy-licence";
     }
 
-    // POST /licence/buy - handles the purchase form submission
+    //handles the purchase form submission
     @PostMapping("/buy")
     public String buyLicenceSubmit(@AuthenticationPrincipal UserDetails userDetails,
                                    @RequestParam String addressLine1,
@@ -75,7 +73,7 @@ public class LicenceController {
         }
     }
 
-    // POST /licence/cancel - cancels a licence by ID
+    //cancels a licence by ID
     @PostMapping("/cancel")
     public String cancelLicence(@AuthenticationPrincipal UserDetails userDetails,
                                 @RequestParam Long licenceId,

@@ -23,10 +23,7 @@
         <p th:text="${error}">Error message</p>
     </div>
 
-    <!-- LOGIN FORM
-         Spring Security processes this POST at /login automatically
-         The field names MUST be "username" and "password" to match
-         what we configured in SecurityConfig -->
+    <!-- LOGIN FORM-->
     <form th:action="@{/login}" method="post">
 
         <label for="username">Email Address</label>
