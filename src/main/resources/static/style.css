@@ -32,9 +32,23 @@ body {
 header {
     background-color: #003479;
     padding: 15px 30px;
+}
+
+.header-inner {
+    max-width: 900px;
+    margin: 0 auto;
     display: flex;
     justify-content: space-between;
     align-items: center;
+}
+
+.header-left,
+.header-right {
+    flex: 1;
+}
+
+.header-right {
+    text-align: right;
 }
 
 /* --- LOGO TEXT ---
@@ -154,6 +168,41 @@ footer {
 
 /* --- ALERT / INFO BOX ---
    A blue information box for important messages */
+.cvv-help {
+    display: inline-block;
+    background-color: #003479;
+    color: white;
+    border-radius: 50%;
+    width: 18px;
+    height: 18px;
+    font-size: 12px;
+    font-weight: bold;
+    text-align: center;
+    line-height: 18px;
+    margin-left: 6px;
+    cursor: pointer;
+    position: relative;
+}
+
+.cvv-tooltip {
+    display: none;
+    position: absolute;
+    left: 26px;
+    top: -6px;
+    background-color: #333;
+    color: white;
+    padding: 8px 12px;
+    border-radius: 4px;
+    font-size: 13px;
+    font-weight: normal;
+    width: 220px;
+    z-index: 10;
+}
+
+.cvv-help:hover .cvv-tooltip {
+    display: block;
+}
+
 .alert {
     background-color: #e8f0fe;
     border-left: 4px solid #003479;

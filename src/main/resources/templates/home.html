@@ -16,7 +16,12 @@
 
         <label for="fineReference">Fine Reference Number</label>
         <input type="text" id="fineReference" name="fineReference"
-               placeholder="e.g. REF-0001" required />
+               value="REF-" required />
+        <script>
+            const input = document.getElementById('fineReference');
+            input.focus();
+            input.setSelectionRange(input.value.length, input.value.length);
+        </script>
 
         <label for="postcode">Postcode</label>
         <input type="text" id="postcode" name="postcode"

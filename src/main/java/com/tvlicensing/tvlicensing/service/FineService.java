@@ -18,6 +18,11 @@ public class FineService {
         return fineRepository.findByFineReferenceIgnoreCaseAndPostcodeIgnoreCase(fineReference, postcode);
     }
 
+    public Fine lookupFine(Long fineId) {
+        return fineRepository.findById(fineId)
+                .orElseThrow(() -> new RuntimeException("Fine not found"));
+    }
+
     public Fine payFine(Long fineId) {
         Fine fine = fineRepository.findById(fineId)
                 .orElseThrow(() -> new RuntimeException("Fine not found"));

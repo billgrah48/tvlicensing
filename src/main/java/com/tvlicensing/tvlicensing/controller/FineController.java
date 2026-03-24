@@ -53,6 +53,13 @@ public class FineController {
             return "card-details";
         }
 
+        if (cardPaymentForm.getCardNumber().equals("0000000000000000")) {
+            Fine fine = fineService.lookupFine(fineId);
+            model.addAttribute("fineId", fineId);
+            model.addAttribute("fineReference", fine.getFineReference());
+            return "payment-failed";
+        }
+
         Fine fine = fineService.payFine(fineId);
         model.addAttribute("fine", fine);
         return "payment-success";
