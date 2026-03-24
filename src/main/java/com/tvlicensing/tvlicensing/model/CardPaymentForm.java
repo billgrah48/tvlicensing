@@ -2,6 +2,7 @@ package com.tvlicensing.tvlicensing.model;
 
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Pattern;
+import org.hibernate.validator.constraints.CreditCardNumber;
 
 public class CardPaymentForm {
 
@@ -9,7 +10,7 @@ public class CardPaymentForm {
     private String nameOnCard;
 
     @NotBlank(message = "Card number is required")
-    @Pattern(regexp = "\\d{16}", message = "Card number must be 16 digits")
+    @CreditCardNumber(message = "Please enter a valid card number")
     private String cardNumber;
 
     @NotBlank(message = "Expiry date is required")

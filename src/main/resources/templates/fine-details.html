@@ -7,6 +7,7 @@
 <body>
 
 <header th:replace="~{fragments :: header}"></header>
+<div th:replace="~{fragments :: progress(2)}"></div>
 
 <main>
     <h1>Your Fine</h1>
@@ -27,8 +28,7 @@
        th:href="@{/fine/pay(fineId=${fine.id})}"
        class="btn">Pay Now - £<span th:text="${fine.amount}"></span></a>
 
-    <br/>
-    <a href="/">Back</a>
+    <a href="/" class="btn-secondary">Back</a>
 </main>
 
 <footer th:replace="~{fragments :: footer}"></footer>
