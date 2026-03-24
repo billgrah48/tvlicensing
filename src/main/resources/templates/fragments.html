@@ -13,6 +13,28 @@
     </div>
 </header>
 
+<div th:fragment="progress(currentStep)" class="progress-bar">
+    <div class="progress-step" th:classappend="${currentStep == 1} ? 'active' : (${currentStep > 1} ? 'done' : '')">
+        <div class="progress-circle">1</div>
+        <div class="progress-label">Find Fine</div>
+    </div>
+    <div class="progress-line" th:classappend="${currentStep > 1} ? 'done' : ''"></div>
+    <div class="progress-step" th:classappend="${currentStep == 2} ? 'active' : (${currentStep > 2} ? 'done' : '')">
+        <div class="progress-circle">2</div>
+        <div class="progress-label">Fine Details</div>
+    </div>
+    <div class="progress-line" th:classappend="${currentStep > 2} ? 'done' : ''"></div>
+    <div class="progress-step" th:classappend="${currentStep == 3} ? 'active' : (${currentStep > 3} ? 'done' : '')">
+        <div class="progress-circle">3</div>
+        <div class="progress-label">Pay</div>
+    </div>
+    <div class="progress-line" th:classappend="${currentStep > 3} ? 'done' : ''"></div>
+    <div class="progress-step" th:classappend="${currentStep == 4} ? 'active' : ''">
+        <div class="progress-circle">4</div>
+        <div class="progress-label">Complete</div>
+    </div>
+</div>
+
 <footer th:fragment="footer">
     <p style="color: white;">Made by Ben, Billy, Adam and Joli as part of the Version 1 Digital Skills Academy.</p>
 </footer>
