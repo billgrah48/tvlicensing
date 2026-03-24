@@ -25,7 +25,7 @@
 
     <a th:if="${fine.status.name() == 'UNPAID'}"
        th:href="@{/fine/pay(fineId=${fine.id})}"
-       class="btn">Pay Now — £<span th:text="${fine.amount}"></span></a>
+       class="btn">Pay Now - £<span th:text="${fine.amount}"></span></a>
 
     <br/>
     <a href="/">Back</a>

@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head>
+    <title>TV Licensing - Payment Failed</title>
+    <link rel="stylesheet" th:href="@{/style.css}" />
+</head>
+<body>
+
+<header th:replace="~{fragments :: header}"></header>
+
+<main>
+    <h1>Payment Failed</h1>
+
+    <div class="alert" style="border-left-color: #d32f2f; background-color: #fdecea;">
+        <p>Your payment was declined. Please check your card details and try again.</p>
+    </div>
+
+    <p><strong>Reference Number:</strong> <span th:text="${fineReference}"></span></p>
+
+    <a th:href="@{/fine/pay(fineId=${fineId})}" class="btn">Try Again</a>
+    <a href="/" class="btn">Back to Home</a>
+</main>
+
+<footer th:replace="~{fragments :: footer}"></footer>
+
+</body>
+</html>

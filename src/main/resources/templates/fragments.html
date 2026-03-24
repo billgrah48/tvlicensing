@@ -4,10 +4,13 @@
 <body>
 
 <header th:fragment="header">
-    <a href="/" class="logo">TV Licensing</a>
-    <nav>
-        <a href="/help">Help</a>
-    </nav>
+    <div class="header-inner">
+        <div class="header-left"></div>
+        <a href="/" class="logo">TV Licensing</a>
+        <nav class="header-right">
+            <a href="/help">Help</a>
+        </nav>
+    </div>
 </header>
 
 <footer th:fragment="footer">
