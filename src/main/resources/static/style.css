@@ -21,6 +21,9 @@ body {
     color: #333333;
     font-size: 16px;
     line-height: 1.5;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
 }
 
 /* --- HEADER ---
@@ -61,7 +64,9 @@ header nav a:hover {
    The white box in the centre where page
    content sits */
 main {
+    flex: 1;
     max-width: 900px;
+    width: 100%;
     margin: 40px auto;
     background-color: #ffffff;
     padding: 40px;
@@ -144,7 +149,6 @@ footer {
     color: #ffffff;
     text-align: center;
     padding: 20px;
-    margin-top: 40px;
     font-size: 14px;
 }
 

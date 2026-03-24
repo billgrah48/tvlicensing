@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head>
+    <title>TV Licensing - Fine Not Found</title>
+    <link rel="stylesheet" th:href="@{/style.css}" />
+</head>
+<body>
+
+<header th:replace="~{fragments :: header}"></header>
+
+<main>
+    <h1>Fine Not Found</h1>
+
+    <div class="alert" style="border-left-color: #d32f2f; background-color: #fdecea;">
+        <p>No fine found. Please check your details and try again.</p>
+    </div>
+
+    <a href="/" class="btn">Try Again</a>
+</main>
+
+<footer th:replace="~{fragments :: footer}"></footer>
+
+</body>
+</html>

@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head>
+    <title>TV Licensing - Fine Details</title>
+    <link rel="stylesheet" th:href="@{/style.css}" />
+</head>
+<body>
+
+<header th:replace="~{fragments :: header}"></header>
+
+<main>
+    <h1>Your Fine</h1>
+
+    <div th:if="${fine.status.name() == 'PAID'}" class="alert"
+         style="border-left-color: #2e7d32; background-color: #f1f8f1;">
+        <p>This fine has already been paid.</p>
+    </div>
+
+    <p><strong>Reference:</strong> <span th:text="${fine.fineReference}"></span></p>
+    <p><strong>Reason:</strong> <span th:text="${fine.reason}"></span></p>
+    <p><strong>Amount:</strong> £<span th:text="${fine.amount}"></span></p>
+    <p><strong>Issued:</strong> <span th:text="${#temporals.format(fine.issuedDate, 'dd MMMM yyyy')}"></span></p>
+    <p><strong>Due:</strong> <span th:text="${#temporals.format(fine.dueDate, 'dd MMMM yyyy')}"></span></p>
+    <p><strong>Status:</strong> <span th:text="${fine.status}"></span></p>
+
+    <a th:if="${fine.status.name() == 'UNPAID'}"
+       th:href="@{/fine/pay(fineId=${fine.id})}"
+       class="btn">Pay Now — £<span th:text="${fine.amount}"></span></a>
+
+    <br/>
+    <a href="/">Back</a>
+</main>
+
+<footer th:replace="~{fragments :: footer}"></footer>
+
+</body>
+</html>
