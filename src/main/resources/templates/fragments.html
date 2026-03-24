@@ -1,42 +1,17 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org"
-      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<html xmlns:th="http://www.thymeleaf.org">
 
 <body>
 
-<!-- HEADER FRAGMENT -->
 <header th:fragment="header">
-
-    <!-- Logo linking back to the home page -->
     <a href="/" class="logo">TV Licensing</a>
-
     <nav>
-        <!-- Only show these links if the user IS logged in -->
-        <span sec:authorize="isAuthenticated()">
-                <a href="/dashboard">My Account</a>
-                <form th:action="@{/logout}" method="post" style="display:inline;">
-                    <button type="submit"
-                            style="background:none; border:none; color:white;
-                                   cursor:pointer; font-size:15px;
-                                   text-decoration:underline; padding:0;
-                                   margin-left:20px;">
-                        Sign Out
-                    </button>
-                </form>
-            </span>
-
-        <!-- Only show these links if the user is NOT logged in -->
-        <span sec:authorize="isAnonymous()">
-                <a href="/login">Sign In</a>
-                <a href="/register">Register</a>
-            </span>
+        <a href="/help">Help</a>
     </nav>
-
 </header>
 
-<!-- FOOTER FRAGMENT -->
 <footer th:fragment="footer">
-    <p>© 2026 TV Licensing. All rights reserved.</p>
+    <p style="color: white;">Made by Ben, Billy, Adam and Joli as part of the Version 1 Digital Skills Academy.</p>
 </footer>
 
 </body>

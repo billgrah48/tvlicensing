@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head>
+    <title>TV Licensing - Payment Successful</title>
+    <link rel="stylesheet" th:href="@{/style.css}" />
+</head>
+<body>
+
+<header th:replace="~{fragments :: header}"></header>
+
+<main>
+    <h1>Payment Successful</h1>
+
+    <div class="alert" style="border-left-color: #2e7d32; background-color: #f1f8f1;">
+        <p>Your fine has been paid. No further action is required.</p>
+    </div>
+
+    <p><strong>Reference Number:</strong> <span th:text="${fine.fineReference}"></span></p>
+    <p><strong>Amount Paid:</strong> £<span th:text="${fine.amount}"></span></p>
+
+    <button onclick="window.print()" class="btn">Save as PDF / Print</button>
+    <a href="/" class="btn">Back to Home</a>
+</main>
+
+<footer th:replace="~{fragments :: footer}"></footer>
+
+</body>
+</html>

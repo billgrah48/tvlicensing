@@ -1,36 +1,33 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org" lang="en">
 <head>
-    <title>TV Licensing - Home</title>
+    <title>TV Licensing - Pay a Fine</title>
     <link rel="stylesheet" th:href="@{/style.css}" />
 </head>
-
 <body>
 
-<!-- HEADER FRAGMENT -->
 <header th:replace="~{fragments :: header}"></header>
 
-<!-- MAIN CONTENT -->
 <main>
-    <h1>Welcome to TV Licensing</h1>
+    <h1>Pay a TV Licence Fine</h1>
+    <p>Enter your fine reference number and postcode to find your fine.</p>
 
-    <p>Manage your TV Licence quickly and easily online.</p>
+    <form th:action="@{/fine/lookup}" method="post">
 
-    <div class="alert">
-        <p>From 1 April 2026 a colour TV Licence costs £14.54 a month by Direct Debit. Or <strong>£174.50</strong> in one go.</p>
-    </div>
+        <label for="fineReference">Fine Reference Number</label>
+        <input type="text" id="fineReference" name="fineReference"
+               placeholder="e.g. REF-0001" required />
 
-    <p>Please sign in to your account or register if you are a new customer.</p>
+        <label for="postcode">Postcode</label>
+        <input type="text" id="postcode" name="postcode"
+               placeholder="e.g. BT1 1AA" required />
 
-    <!-- Buttons linking to login and register pages -->
-    <a href="/login" class="btn">Sign In</a>
-    <a href="/register" class="btn">Register</a>
+        <button type="submit" class="btn">Find My Fine</button>
+
+    </form>
 </main>
 
-<!-- FOOTER FRAGMENT
-     Same idea - pulls in the "footer" fragment -->
 <footer th:replace="~{fragments :: footer}"></footer>
 
 </body>
-
 </html>
