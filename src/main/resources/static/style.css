@@ -1,24 +1,20 @@
 /* ============================================
    TV LICENSING APPLICATION - MAIN STYLESHEET
-   Inspired by tvlicensing.co.uk
+   GOV.UK-inspired styling with original header blue
    ============================================ */
 
-/* --- GLOBAL RESET ---
-   Removes default browser spacing so everything
-   looks the same across all browsers */
+/* GLOBAL RESET */
 * {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
 }
 
-/* --- BODY ---
-   Sets the default font and background colour
-   for the entire application */
+/* BODY */
 body {
     font-family: "GDS Transport", Arial, sans-serif;
-    background-color: #f4f4f4;
-    color: #333333;
+    background-color: #f3f2f1;
+    color: #0b0c0c;
     font-size: 1.5rem;
     line-height: 1.5;
     min-height: 100vh;
@@ -26,16 +22,14 @@ body {
     flex-direction: column;
 }
 
-/* --- HEADER ---
-   The dark blue bar that runs across the top
-   of every page, containing the logo and nav */
+/* HEADER – ORIGINAL BLUE */
 header {
-    background-color: #003479;
+    background-color: #003479;          /* your original blue */
     padding: 15px 30px;
 }
 
 .header-inner {
-    max-width: 900px;
+    max-width: 960px;
     margin: 0 auto;
     display: flex;
     justify-content: space-between;
@@ -51,17 +45,19 @@ header {
     text-align: right;
 }
 
-/* --- LOGO TEXT ---
-   Styles the TV Licensing name in the header */
-header .logo {
-    color: #ffffff;
+/* LOGO / SERVICE NAME – FORCE WHITE */
+header .logo,
+header .logo:link,
+header .logo:visited,
+header .logo:hover,
+header .logo:focus {
+    color: #ffffff !important;
     font-size: 2.5rem;
     font-weight: bold;
     text-decoration: none;
 }
 
-/* --- NAVIGATION LINKS ---
-   The links in the top right of the header */
+/* NAV LINKS IN HEADER */
 header nav a {
     color: #ffffff;
     text-decoration: none;
@@ -69,114 +65,150 @@ header nav a {
     font-size: 1.5rem;
 }
 
-/* Changes nav link colour when you hover over it */
 header nav a:hover {
     text-decoration: underline;
 }
 
-/* --- MAIN CONTENT AREA ---
-   The white box in the centre where page
-   content sits */
+/* MAIN CONTENT CARD */
 main {
     flex: 1;
-    max-width: 900px;
+    max-width: 960px;
     width: 100%;
     margin: 40px auto;
     background-color: #ffffff;
     padding: 40px;
-    border-radius: 4px;
+    border-radius: 0;
+    border: 1px solid #b1b4b6;
 }
 
-/* --- PAGE HEADINGS ---
-   The large blue heading at the top of each page */
+/* HEADINGS */
 h1 {
-    color: #003479;
+    color: #1d70b8;
     font-size: 2rem;
     margin-bottom: 20px;
 }
 
-/* --- SUBHEADINGS --- */
 h2 {
-    color: #003479;
+    color: #1d70b8;
     font-size: 1.8rem;
     margin-bottom: 15px;
 }
 
-/* --- PARAGRAPHS ---
-   Adds spacing below each paragraph */
+/* PARAGRAPHS */
 p {
     margin-bottom: 15px;
-    color: #333333;
+    color: #0b0c0c;
 }
 
-/* --- BUTTONS ---
-   The blue action buttons used across the site */
+/* LINKS */
+a {
+    color: #1d70b8;
+    text-decoration: underline;
+}
+
+a:hover {
+    color: #003078;
+}
+
+a:visited {
+    color: #4c2c92;
+}
+
+/* Link focus */
+a:focus {
+    outline: 0;
+    background-color: #ffdd00;
+    color: #0b0c0c;
+    text-decoration: none;
+    box-shadow: 0 -2px #ffdd00, 0 4px #0b0c0c;
+}
+
+/* BUTTONS */
 .btn {
     display: inline-block;
-    background-color: #003479;
+    background-color: #1d70b8;
     color: #ffffff;
     padding: 12px 25px;
     text-decoration: none;
-    border: none;
-    border-radius: 3px;
+    border: 0;
+    border-radius: 0;
     font-size: 1.5rem;
+    font-weight: bold;
     cursor: pointer;
     margin-top: 10px;
 }
 
-/* Changes button colour slightly when hovered */
 .btn:hover {
-    background-color: #002255;
+    background-color: #003078;
+    color: #ffffff;
 }
 
-/* --- FORMS ---
-   Styles input fields and labels in forms */
+/* Secondary button */
+.btn-secondary {
+    display: inline-block;
+    background-color: #ffffff;
+    color: #1d70b8;
+    border: 2px solid #1d70b8;
+    padding: 12px 25px;
+    border-radius: 0;
+    font-size: 1.4rem;
+    cursor: pointer;
+}
+
+.btn-secondary:hover {
+    background-color: #f3f2f1;
+}
+
+/* Focus for buttons and form controls */
+button:focus,
+input:focus,
+textarea:focus,
+select:focus,
+.btn:focus,
+.btn-secondary:focus {
+    outline: 3px solid #ffdd00;
+    outline-offset: 0;
+    border-color: #0b0c0c;
+    box-shadow: 0 0 0 1px #0b0c0c;
+}
+
+/* FORMS */
 form label {
     display: block;
     font-weight: bold;
     margin-bottom: 5px;
-    color: #333333;
+    color: #0b0c0c;
 }
 
-/* Styles the text input boxes */
 form input[type="text"],
 form input[type="email"],
 form input[type="password"] {
     width: 100%;
     padding: 10px;
     margin-bottom: 20px;
-    border: 1px solid #cccccc;
-    border-radius: 3px;
+    border: 2px solid #0b0c0c;
+    border-radius: 0;
     font-size: 1.5rem;
 }
 
-/* Highlights an input box when the user clicks it */
-form input:focus {
-    outline: 3px solid #ffdd00;  /* GOV.UK yellow focus ring */
-    outline-offset: 0;
-    border-color: #003479;
-}
-
-/* --- FOOTER ---
-   The dark blue bar at the bottom of every page */
+/* FOOTER */
 footer {
-    background-color: #003479;
-    color: #ffffff;
+    background-color: #f3f2f1;
+    color: #0b0c0c;
     text-align: center;
     padding: 20px;
-    font-size: 14px;
+    font-size: 0.9rem;
+    border-top: 1px solid #b1b4b6;
 }
 
-/* --- ALERT / INFO BOX ---
-   A blue information box for important messages */
-/* --- PROGRESS BAR --- */
+/* PROGRESS BAR */
 .progress-bar {
     display: flex;
     align-items: center;
     justify-content: center;
     padding: 30px 0;
     background-color: #ffffff;
-    border-bottom: 1px solid #e0e0e0;
+    border-bottom: 1px solid #b1b4b6;
 }
 
 .progress-step {
@@ -190,8 +222,8 @@ footer {
     width: 32px;
     height: 32px;
     border-radius: 50%;
-    background-color: #cccccc;
-    color: white;
+    background-color: #b1b4b6;
+    color: #ffffff;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -200,41 +232,41 @@ footer {
 }
 
 .progress-step.active .progress-circle {
-    background-color: #003479;
+    background-color: #1d70b8;
 }
 
 .progress-step.done .progress-circle {
-    background-color: #2e7d32;
+    background-color: #00703c;
 }
 
 .progress-label {
     font-size: 12px;
-    color: #999999;
+    color: #505a5f;
     white-space: nowrap;
 }
 
 .progress-step.active .progress-label {
-    color: #003479;
+    color: #1d70b8;
     font-weight: bold;
 }
 
 .progress-step.done .progress-label {
-    color: #2e7d32;
+    color: #00703c;
 }
 
 .progress-line {
     width: 100px;
     height: 2px;
-    background-color: #cccccc;
+    background-color: #b1b4b6;
     align-self: flex-start;
     margin-top: 15px;
 }
 
 .progress-line.done {
-    background-color: #2e7d32;
+    background-color: #00703c;
 }
 
-/* --- MODAL --- */
+/* MODAL */
 .modal-overlay {
     display: none;
     position: fixed;
@@ -252,13 +284,15 @@ footer {
 .modal {
     background-color: #ffffff;
     padding: 30px;
-    border-radius: 4px;
+    border-radius: 0;
     max-width: 400px;
     width: 90%;
+    border: 1px solid #b1b4b6;
 }
 
 .modal h2 {
     margin-bottom: 10px;
+    color: #1d70b8;
 }
 
 .modal p {
@@ -270,25 +304,11 @@ footer {
     gap: 10px;
 }
 
-.btn-secondary {
-    display: inline-block;
-    background-color: #ffffff;
-    color: #003479;
-    border: 2px solid #003479;
-    padding: 12px 25px;
-    border-radius: 3px;
-    font-size: 16px;
-    cursor: pointer;
-}
-
-.btn-secondary:hover {
-    background-color: #f0f0f0;
-}
-
+/* CVV HELP ICON */
 .cvv-help {
     display: inline-block;
-    background-color: #003479;
-    color: white;
+    background-color: #1d70b8;
+    color: #ffffff;
     border-radius: 50%;
     width: 18px;
     height: 18px;
@@ -306,8 +326,8 @@ footer {
     position: absolute;
     left: 26px;
     top: -6px;
-    background-color: #333;
-    color: white;
+    background-color: #0b0c0c;
+    color: #ffffff;
     padding: 8px 12px;
     border-radius: 4px;
     font-size: 13px;
@@ -319,12 +339,15 @@ footer {
 .cvv-help:hover .cvv-tooltip {
     display: block;
 }
+
+/* FIELD ERROR TEXT */
 .error {
     color: #d4351c;
     margin-top: 4px;
     font-size: 0.9rem;
 }
-/* GOV.UK‑style error summary box */
+
+/* ERROR SUMMARY */
 .error-summary {
     border: 4px solid #d4351c;
     padding: 15px;
@@ -347,10 +370,12 @@ footer {
     color: #d4351c;
     text-decoration: underline;
 }
+
+/* INFO / ALERT BOX */
 .alert {
-    background-color: #e8f0fe;
-    border-left: 4px solid #003479;
+    background-color: #f3f2f1;
+    border-left: 10px solid #1d70b8;
     padding: 15px;
     margin-bottom: 20px;
-    color: #333333;
+    color: #0b0c0c;
 }
