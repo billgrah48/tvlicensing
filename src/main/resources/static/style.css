@@ -19,7 +19,7 @@ body {
     font-family: Arial, Helvetica, sans-serif;
     background-color: #f4f4f4;
     color: #333333;
-    font-size: 16px;
+    font-size: 1.5rem;
     line-height: 1.5;
     min-height: 100vh;
     display: flex;
@@ -55,7 +55,7 @@ header {
    Styles the TV Licensing name in the header */
 header .logo {
     color: #ffffff;
-    font-size: 22px;
+    font-size: 2.5rem;
     font-weight: bold;
     text-decoration: none;
 }
@@ -91,14 +91,14 @@ main {
    The large blue heading at the top of each page */
 h1 {
     color: #003479;
-    font-size: 28px;
+    font-size: 2rem;
     margin-bottom: 20px;
 }
 
 /* --- SUBHEADINGS --- */
 h2 {
     color: #003479;
-    font-size: 22px;
+    font-size: 1.8rem;
     margin-bottom: 15px;
 }
 
@@ -119,7 +119,7 @@ p {
     text-decoration: none;
     border: none;
     border-radius: 3px;
-    font-size: 16px;
+    font-size: 1.5rem;
     cursor: pointer;
     margin-top: 10px;
 }
@@ -147,7 +147,7 @@ form input[type="password"] {
     margin-bottom: 20px;
     border: 1px solid #cccccc;
     border-radius: 3px;
-    font-size: 16px;
+    font-size: 1.5rem;
 }
 
 /* Highlights an input box when the user clicks it */
@@ -318,7 +318,34 @@ footer {
 .cvv-help:hover .cvv-tooltip {
     display: block;
 }
+.error {
+    color: #d4351c;
+    margin-top: 4px;
+    font-size: 0.9rem;
+}
+/* GOV.UK‑style error summary box */
+.error-summary {
+    border: 4px solid #d4351c;
+    padding: 15px;
+    margin-bottom: 20px;
+    background-color: #f3f2f1;
+}
 
+.error-summary h2 {
+    margin-bottom: 10px;
+    color: #d4351c;
+    font-size: 1.6rem;
+}
+
+.error-summary ul {
+    list-style: none;
+    padding-left: 0;
+}
+
+.error-summary li a {
+    color: #d4351c;
+    text-decoration: underline;
+}
 .alert {
     background-color: #e8f0fe;
     border-left: 4px solid #003479;

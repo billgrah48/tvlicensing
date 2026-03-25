@@ -13,23 +13,57 @@
     <h1>Pay a TV Licence Fine</h1>
     <p>Enter your fine reference number and postcode to find your fine.</p>
 
-    <form th:action="@{/fine/lookup}" method="post">
+    <form th:action="@{/fine/lookup}"
+          th:object="${fineLookupForm}"
+          method="post">
 
+        <!-- Error summary INSIDE the form -->
+        <div class="error-summary"
+             th:if="${#fields.hasAnyErrors()}">
+            <h2>There is a problem</h2>
+            <ul>
+                <li th:if="${#fields.hasErrors('fineReference')}">
+                    <a href="#fineReference"
+                       th:errors="*{fineReference}">
+                        This reference number is invalid, please try again
+                    </a>
+                </li>
+                <li th:if="${#fields.hasErrors('postcode')}">
+                    <a href="#postcode"
+                       th:errors="*{postcode}">
+                        This postcode is invalid, please try again
+                    </a>
+                </li>
+            </ul>
+        </div>
+
+        <!-- Fine reference field -->
         <label for="fineReference">Fine Reference Number</label>
-        <input type="text" id="fineReference" name="fineReference"
-               value="REF-" required />
-        <script>
-            const input = document.getElementById('fineReference');
-            input.focus();
-            input.setSelectionRange(input.value.length, input.value.length);
-        </script>
+        <input type="text"
+               id="fineReference"
+               th:field="*{fineReference}"
+               value="REF-" />
 
+        <div class="error"
+             th:if="${#fields.hasErrors('fineReference')}"
+             th:errors="*{fineReference}">
+            This reference number is invalid, please try again.
+        </div>
+
+        <!-- Postcode field -->
         <label for="postcode">Postcode</label>
-        <input type="text" id="postcode" name="postcode"
-               placeholder="e.g. BT1 1AA" required />
+        <input type="text"
+               id="postcode"
+               th:field="*{postcode}"
+               placeholder="e.g. BT1 1AA" />
+
+        <div class="error"
+             th:if="${#fields.hasErrors('postcode')}"
+             th:errors="*{postcode}">
+            This postcode is invalid, please try again
+        </div>
 
         <button type="submit" class="btn">Find My Fine</button>
-
     </form>
 </main>
 

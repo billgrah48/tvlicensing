@@ -1,5 +1,6 @@
 package com.tvlicensing.tvlicensing.controller;
 
+import com.tvlicensing.tvlicensing.model.FineLookupForm;
 import com.tvlicensing.tvlicensing.model.CardPaymentForm;
 import com.tvlicensing.tvlicensing.model.Fine;
 import com.tvlicensing.tvlicensing.service.FineService;
@@ -21,11 +22,18 @@ public class FineController {
     }
 
     @PostMapping("/lookup")
-    public String lookup(@RequestParam String fineReference,
-                         @RequestParam String postcode,
+    public String lookup(@Valid @ModelAttribute("fineLookupForm") FineLookupForm form,
+                         BindingResult bindingResult,
                          Model model) {
 
-        Optional<Fine> result = fineService.lookupFine(fineReference, postcode);
+        // If validation fails, stay on the same page and show errors
+        if (bindingResult.hasErrors()) {
+            model.addAttribute("fineLookupForm", form);
+            return "home";   // your lookup page
+        }
+
+        Optional<Fine> result =
+                fineService.lookupFine(form.getFineReference(), form.getPostcode());
 
         if (result.isEmpty()) {
             return "not-found";
@@ -33,6 +41,11 @@ public class FineController {
 
         model.addAttribute("fine", result.get());
         return "fine-details";
+    }
+    @GetMapping("/lookup")
+    public String showLookupForm(Model model) {
+        model.addAttribute("fineLookupForm", new FineLookupForm());
+        return "home";
     }
 
     @GetMapping("/pay")
