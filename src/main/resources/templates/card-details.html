@@ -21,48 +21,175 @@
     <form id="paymentForm" th:action="@{/fine/pay}" th:object="${cardPaymentForm}" method="post">
 
         <input type="hidden" name="fineId" th:value="${fineId}" />
+        <!-- GOV.UK-style error summary -->
+        <div class="error-summary"
+             th:if="${#fields.hasAnyErrors()}">
+            <h2>There is a problem</h2>
+            <ul>
+                <li th:if="${#fields.hasErrors('nameOnCard')}">
+                    <a href="#nameOnCard"
+                       th:errors="*{nameOnCard}">Name on card error</a>
+                </li>
+                <li th:if="${#fields.hasErrors('cardNumber')}">
+                    <a href="#cardNumber"
+                       th:errors="*{cardNumber}">Card number error</a>
+                </li>
+                <li th:if="${#fields.hasErrors('expiryDate')}">
+                    <a href="#expiryDate"
+                       th:errors="*{expiryDate}">Expiry date error</a>
+                </li>
+                <li th:if="${#fields.hasErrors('cvv')}">
+                    <a href="#cvv"
+                       th:errors="*{cvv}">CVV error</a>
+                </li>
+            </ul>
+        </div>
+        <!-- Name on card -->
+        <div class="govuk-form-group"
+             th:classappend="${#fields.hasErrors('nameOnCard')} ? ' govuk-form-group--error'">
+            <label class="govuk-label" for="nameOnCard">
+                Name on card
+            </label>
 
-        <label for="nameOnCard">Name on Card</label>
-        <input type="text" id="nameOnCard" name="nameOnCard"
-               th:value="*{nameOnCard}"
-               placeholder="As it appears on your card" />
-        <p style="color:#d32f2f; font-size:14px; margin-top:-15px; margin-bottom:10px;"
-           th:if="${#fields.hasErrors('nameOnCard')}"
-           th:errors="*{nameOnCard}">Name error</p>
+            <div class="govuk-hint">
+                Enter the name exactly as it appears on the front of your card.
+            </div>
 
-        <label for="cardNumber">Card Number</label>
-        <input type="text" id="cardNumber" name="cardNumber"
-               th:value="*{cardNumber}"
-               placeholder="1234 5678 9012 3456"
-               maxlength="19" />
-        <p style="color:#d32f2f; font-size:14px; margin-top:-15px; margin-bottom:10px;"
-           th:if="${#fields.hasErrors('cardNumber')}"
-           th:errors="*{cardNumber}">Card number error</p>
+            <div class="govuk-error-message"
+                 th:if="${#fields.hasErrors('nameOnCard')}"
+                 th:errors="*{nameOnCard}">
+                Enter the name as it appears on the card.
+            </div>
 
-        <label for="expiryDate">Expiry Date</label>
-        <input type="text" id="expiryDate" name="expiryDate"
-               th:value="*{expiryDate}"
-               placeholder="MM/YY"
-               maxlength="5" />
-        <p style="color:#d32f2f; font-size:14px; margin-top:-15px; margin-bottom:10px;"
-           th:if="${#fields.hasErrors('expiryDate')}"
-           th:errors="*{expiryDate}">Expiry error</p>
+            <input class="govuk-input"
+                   th:classappend="${#fields.hasErrors('nameOnCard')} ? ' govuk-input--error'"
+                   type="text"
+                   id="nameOnCard"
+                   name="nameOnCard"
+                   th:field="*{nameOnCard}"
+                   placeholder="As it appears on your card" />
+        </div>
 
-        <label for="cvv">CVV
-            <span class="cvv-help">?
-                <span class="cvv-tooltip">The 3-digit security code on the back of your card.</span>
+        <!-- Card number -->
+        <div class="govuk-form-group"
+             th:classappend="${#fields.hasErrors('cardNumber')} ? ' govuk-form-group--error'">
+            <label class="govuk-label" for="cardNumber">
+                Card number
+            </label>
+
+            <div class="govuk-hint">
+                Enter the 16-digit number on the front of your card, with or without spaces.
+            </div>
+
+            <div class="govuk-error-message"
+                 th:if="${#fields.hasErrors('cardNumber')}"
+                 th:errors="*{cardNumber}">
+                Enter a valid card number, for example 1234 5678 9012 3456.
+            </div>
+
+            <input class="govuk-input"
+                   th:classappend="${#fields.hasErrors('cardNumber')} ? ' govuk-input--error'"
+                   type="text"
+                   id="cardNumber"
+                   name="cardNumber"
+                   th:field="*{cardNumber}"
+                   placeholder="1234 5678 9012 3456"
+                   maxlength="19" />
+        </div>
+
+        <!-- Expiry date -->
+        <div class="govuk-form-group"
+             th:classappend="${#fields.hasErrors('expiryDate')} ? ' govuk-form-group--error'">
+            <label class="govuk-label" for="expiryDate">
+                Expiry date
+            </label>
+
+            <div class="govuk-hint">
+                Enter the expiry date from your card in the format MM/YY.
+            </div>
+
+            <div class="govuk-error-message"
+                 th:if="${#fields.hasErrors('expiryDate')}"
+                 th:errors="*{expiryDate}">
+                Enter the expiry date in the format MM/YY.
+            </div>
+
+            <input class="govuk-input"
+                   th:classappend="${#fields.hasErrors('expiryDate')} ? ' govuk-input--error'"
+                   type="text"
+                   id="expiryDate"
+                   name="expiryDate"
+                   th:field="*{expiryDate}"
+                   placeholder="MM/YY"
+                   maxlength="5" />
+        </div>
+
+        <!-- CVV -->
+        <div class="govuk-form-group"
+             th:classappend="${#fields.hasErrors('cvv')} ? ' govuk-form-group--error'">
+            <label class="govuk-label" for="cvv">
+                Security code (CVV)
+                <span class="cvv-help">?
+                <span class="cvv-tooltip">
+                    The 3-digit security code on the back of your card.
+                </span>
             </span>
-        </label>
-        <input type="text" id="cvv" name="cvv"
-               th:value="*{cvv}"
-               placeholder="3-digit code"
-               maxlength="3" />
-        <p style="color:#d32f2f; font-size:14px; margin-top:-15px; margin-bottom:10px;"
-           th:if="${#fields.hasErrors('cvv')}"
-           th:errors="*{cvv}">CVV error</p>
+            </label>
 
-        <button type="button" class="btn" onclick="document.getElementById('confirmModal').classList.add('active')">
-            Confirm Payment
+            <div class="govuk-hint">
+                This is the last 3 digits on the signature strip on the back of your card.
+            </div>
+
+            <div class="govuk-error-message"
+                 th:if="${#fields.hasErrors('cvv')}"
+                 th:errors="*{cvv}">
+                Enter the 3-digit security code from the back of your card.
+            </div>
+
+            <input class="govuk-input"
+                   th:classappend="${#fields.hasErrors('cvv')} ? ' govuk-input--error'"
+                   type="text"
+                   id="cvv"
+                   name="cvv"
+                   th:field="*{cvv}"
+                   placeholder="3-digit code"
+                   maxlength="3" />
+        </div>
+        <!-- Amount to pay -->
+        <div class="govuk-form-group"
+             th:classappend="${#fields.hasErrors('amount')} ? ' govuk-form-group--error'">
+            <label class="govuk-label" for="amount">
+                Amount
+            </label>
+
+            <div class="govuk-hint">
+                Please enter an amount between 1 and
+                <span th:text="${fineAmount}">the full fine</span> – for example, 25.50.
+            </div>
+
+            <div class="govuk-error-message"
+                 th:if="${#fields.hasErrors('amount')}"
+                 th:errors="*{amount}">
+                Enter a valid amount (for example 50 or 50.00) that is not more than the fine.
+            </div>
+
+            <div class="amount-input-wrapper">
+                <span class="amount-input-prefix">£</span>
+                <input class="govuk-input amount-input-field"
+                       th:classappend="${#fields.hasErrors('amount')} ? ' govuk-input--error'"
+                       type="text"
+                       id="amount"
+                       name="amount"
+                       th:field="*{amount}"
+                       inputmode="decimal"
+                       pattern="^[0-9]+(\\.[0-9]{1,2})?$"
+                       placeholder="e.g. 25.50" />
+            </div>
+        </div>
+
+        <button type="button" class="btn"
+                onclick="document.getElementById('confirmModal').classList.add('active')">
+            Confirm payment
         </button>
 
     </form>

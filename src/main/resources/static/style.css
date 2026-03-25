@@ -83,14 +83,20 @@ main {
 
 /* HEADINGS */
 h1 {
-    color: #1d70b8;
+    color: #003479;
     font-size: 2rem;
     margin-bottom: 20px;
 }
 
 h2 {
-    color: #1d70b8;
+    color: #003479;
     font-size: 1.8rem;
+    margin-bottom: 15px;
+}
+
+h3 {
+    color: #003479;
+    font-size: 1.6rem;
     margin-bottom: 15px;
 }
 
@@ -123,10 +129,10 @@ a:focus {
     box-shadow: 0 -2px #ffdd00, 0 4px #0b0c0c;
 }
 
-/* BUTTONS */
+/* Primary action button – GOV.UK green */
 .btn {
     display: inline-block;
-    background-color: #1d70b8;
+    background-color: #00703c;      /* GOV.UK green */
     color: #ffffff;
     padding: 12px 25px;
     text-decoration: none;
@@ -138,10 +144,12 @@ a:focus {
     margin-top: 10px;
 }
 
+/* Hover state – darker green */
 .btn:hover {
-    background-color: #003078;
+    background-color: #005a30;      /* darker green on hover */
     color: #ffffff;
 }
+
 
 /* Secondary button */
 .btn-secondary {
@@ -259,7 +267,7 @@ footer {
     height: 2px;
     background-color: #b1b4b6;
     align-self: flex-start;
-    margin-top: 15px;
+    margin: 15px 8px 0 8px;  /* add horizontal margin */
 }
 
 .progress-line.done {
@@ -370,6 +378,27 @@ footer {
     color: #d4351c;
     text-decoration: underline;
 }
+.amount-input-wrapper {
+    display: inline-flex;
+    align-items: stretch;
+    max-width: 220px;
+}
+
+.amount-input-prefix {
+    border: 2px solid #0b0c0c;
+    border-right: 0;
+    padding: 10px 12px;
+    background: #f3f2f1;
+    font-size: 1.5rem;
+    box-sizing: border-box;
+}
+
+.amount-input-field {
+    max-width: 140px;
+    border: 2px solid #0b0c0c;
+    border-left: 0;
+    font-size: 1.5rem;
+}
 
 /* INFO / ALERT BOX */
 .alert {
@@ -378,4 +407,76 @@ footer {
     padding: 15px;
     margin-bottom: 20px;
     color: #0b0c0c;
+}
+/* GOV.UK-style form groups, hints and error styling */
+
+.govuk-form-group {
+    margin-bottom: 20px;
+    padding-left: 0;
+    border-left: 0;
+}
+
+.govuk-form-group--error {
+    border-left: 5px solid #d4351c;   /* red vertical line */
+    padding-left: 15px;
+}
+
+.govuk-label {
+    display: block;
+    font-weight: bold;
+    margin-bottom: 5px;
+    color: #0b0c0c;
+}
+
+.govuk-hint {
+    margin-bottom: 5px;
+    color: #505a5f;                  /* grey hint text */
+    font-size: 1.3rem;
+}
+
+.govuk-error-message {
+    margin-bottom: 5px;
+    color: #d4351c;
+    font-weight: bold;
+    font-size: 1.3rem;
+}
+
+.govuk-input {
+    width: 100%;
+    padding: 10px;
+    border: 2px solid #0b0c0c;
+    border-radius: 0;
+    font-size: 1.5rem;
+}
+
+.govuk-input--error {
+    border-color: #d4351c;
+}
+/* Fix width/height of amount input so it lines up with £ box */
+.amount-input-wrapper {
+    display: inline-flex;
+    align-items: stretch;
+}
+
+.amount-input-prefix {
+    border: 2px solid #0b0c0c;
+    border-right: 0;
+    background: #f3f2f1;
+    font-size: 1.5rem;
+    box-sizing: border-box;
+
+    /* values you found in Inspect */
+    height: 52px;
+    padding-right: 10px;
+    padding-left: 10px;
+    padding-top: 6px;
+}
+
+.govuk-input.amount-input-field {
+    width: 140px;          /* override 100% from .govuk-input */
+    padding: 10px;         /* same vertical padding as prefix */
+    border: 2px solid #0b0c0c;
+    border-left: 0;
+    border-radius: 0;
+    box-sizing: border-box;
 }

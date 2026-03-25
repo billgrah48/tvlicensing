@@ -1,8 +1,11 @@
 package com.tvlicensing.tvlicensing.model;
 
+import jakarta.validation.constraints.DecimalMin;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Pattern;
 import org.hibernate.validator.constraints.CreditCardNumber;
+
+import java.math.BigDecimal;
 
 public class CardPaymentForm {
 
@@ -18,17 +21,48 @@ public class CardPaymentForm {
     @Pattern(regexp = "\\d{3}", message = "CVV is required and must be 3 digits")
     private String cvv;
 
+    @DecimalMin(value = "0.01", message = "Enter an amount greater than 0")
+    private BigDecimal amount;
+
     public CardPaymentForm() {}
 
-    public String getNameOnCard() { return nameOnCard; }
-    public void setNameOnCard(String nameOnCard) { this.nameOnCard = nameOnCard; }
+    public String getNameOnCard() {
+        return nameOnCard;
+    }
 
-    public String getCardNumber() { return cardNumber; }
-    public void setCardNumber(String cardNumber) { this.cardNumber = cardNumber; }
+    public void setNameOnCard(String nameOnCard) {
+        this.nameOnCard = nameOnCard;
+    }
 
-    public String getExpiryDate() { return expiryDate; }
-    public void setExpiryDate(String expiryDate) { this.expiryDate = expiryDate; }
+    public String getCardNumber() {
+        return cardNumber;
+    }
 
-    public String getCvv() { return cvv; }
-    public void setCvv(String cvv) { this.cvv = cvv; }
+    public void setCardNumber(String cardNumber) {
+        this.cardNumber = cardNumber;
+    }
+
+    public String getExpiryDate() {
+        return expiryDate;
+    }
+
+    public void setExpiryDate(String expiryDate) {
+        this.expiryDate = expiryDate;
+    }
+
+    public String getCvv() {
+        return cvv;
+    }
+
+    public void setCvv(String cvv) {
+        this.cvv = cvv;
+    }
+
+    public BigDecimal getAmount() {
+        return amount;
+    }
+
+    public void setAmount(BigDecimal amount) {
+        this.amount = amount;
+    }
 }

@@ -17,7 +17,8 @@
     </div>
 
     <p><strong>Reference Number:</strong> <span th:text="${fine.fineReference}"></span></p>
-    <p><strong>Amount Paid:</strong> £<span th:text="${fine.amount}"></span></p>
+    <p><strong>Amount Paid:</strong> £<span th:text="${amountPaid}"></span></p>
+
 
     <button onclick="window.print()" class="btn">Save as PDF / Print</button>
     <a href="/" class="btn">Back to Home</a>

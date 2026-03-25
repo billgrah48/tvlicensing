@@ -29,4 +29,8 @@ public class FineService {
         fine.setStatus(Fine.FineStatus.PAID);
         return fineRepository.save(fine);
     }
+    public Fine saveFine(Fine fine) {
+        return fineRepository.save(fine);
+    }
+
 }
