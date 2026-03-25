@@ -6,4 +6,6 @@ import java.util.Optional;
 
 public interface FineRepository extends JpaRepository<Fine, Long> {
     Optional<Fine> findByFineReferenceIgnoreCaseAndPostcodeIgnoreCase(String fineReference, String postcode);
+
+    Object findByFineReferenceAndPostcode(String s, String s1);
 }
