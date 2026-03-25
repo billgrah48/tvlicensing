@@ -480,3 +480,23 @@ footer {
     border-radius: 0;
     box-sizing: border-box;
 }
+/* Prevent visited/hover link colour overriding button colour */
+a.btn,
+a.btn:visited,
+a.btn:hover,
+a.btn:focus {
+    background-color: #00703c;
+    color: #ffffff;
+    text-decoration: none;
+}
+
+a.btn:hover {
+    background-color: #005a30;
+}
+
+/* Same width for both success page buttons */
+button.btn,
+a.btn {
+    width: 220px;
+    text-align: center;
+}
