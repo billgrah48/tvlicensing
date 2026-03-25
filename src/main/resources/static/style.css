@@ -16,7 +16,7 @@
    Sets the default font and background colour
    for the entire application */
 body {
-    font-family: Arial, Helvetica, sans-serif;
+    font-family: "GDS Transport", Arial, sans-serif;
     background-color: #f4f4f4;
     color: #333333;
     font-size: 1.5rem;
@@ -152,7 +152,8 @@ form input[type="password"] {
 
 /* Highlights an input box when the user clicks it */
 form input:focus {
-    outline: none;
+    outline: 3px solid #ffdd00;  /* GOV.UK yellow focus ring */
+    outline-offset: 0;
     border-color: #003479;
 }
 
