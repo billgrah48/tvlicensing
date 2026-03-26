@@ -377,6 +377,7 @@ footer {
 .error-summary li a {
     color: #d4351c;
     text-decoration: underline;
+    white-space: pre-line;
 }
 .amount-input-wrapper {
     display: inline-flex;
@@ -439,6 +440,7 @@ footer {
     color: #d4351c;
     font-weight: bold;
     font-size: 1.3rem;
+    white-space: pre-line;
 }
 
 .govuk-input {

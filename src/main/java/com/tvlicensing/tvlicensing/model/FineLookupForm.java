@@ -8,7 +8,7 @@ public class FineLookupForm {
 
     @Pattern(
             regexp = "(?i)^REF-[A-Za-z0-9]{6}$",
-            message = "Enter a valid fine reference must start with REF- followed by 6 letters or numbers, for example REF-12AB34. You can find it on the letter about your fine."
+            message = "Enter a valid fine reference, for example REF-12AB34.\nYou can find it on the letter about your fine."
     )
     private String fineReference = "REF-";
 

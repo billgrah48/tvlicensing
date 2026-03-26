@@ -42,6 +42,10 @@
                     <a href="#cvv"
                        th:errors="*{cvv}">CVV error</a>
                 </li>
+                <li th:if="${#fields.hasErrors('amount')}">
+                <a href="#amount"
+                   th:errors="*{amount}">Amount error</a>
+            </li>
             </ul>
         </div>
         <!-- Name on card -->
